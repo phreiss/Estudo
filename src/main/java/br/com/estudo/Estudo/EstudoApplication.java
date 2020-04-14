@@ -6,14 +6,22 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import br.com.estudo.Controller.NasaController;
 import br.com.estudo.Nasa.Nasa;
+import br.com.estudo.Repository.NasaRepository;
 
 @SpringBootApplication
 public class EstudoApplication {
+	
+	@Autowired
+	public static NasaController nasaController;
+	
+	@Autowired
+	private static NasaRepository nasaRepository;
 
 	public static void main(String[] args) throws Exception {
 		SpringApplication.run(EstudoApplication.class, args);
@@ -43,9 +51,8 @@ public class EstudoApplication {
         n.setCopyright(json.getString("url"));
         n.setDate(json.getString("date"));
         n.setExplanation(json.getString("explanation"));
-        
-        NasaController nc = new NasaController();
-        String x = nc.addNewNasa(n);
+   
+        String x = nasaController.addNewNasa(n);
         System.out.println(x);
         
         conn.disconnect();

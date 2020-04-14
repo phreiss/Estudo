@@ -1,6 +1,7 @@
 package br.com.estudo.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +13,7 @@ import br.com.estudo.Nasa.Nasa;
 import br.com.estudo.Repository.NasaRepository;
 
 @RestController
+@Qualifier("NasaControler")
 @RequestMapping(value = "/Nasa")
 public class NasaController {
 
@@ -27,7 +29,7 @@ public class NasaController {
 		n.setExplanation(nasa.getExplanation());
 		
 		System.out.println(nasaRepository);
-
+		
 		nasaRepository.save(n);
 		return "Saved";
 	}
